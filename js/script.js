@@ -20,7 +20,7 @@ $('.activities').prepend('<p id="actErr" class="errorMsg">You must register for 
 $('.activities').append(`<p id="totalCostMessage">Your total is: <strong>$<span id="cost">${calcCost}</span></strong></p>`);
 
 // set some preferences for on load
-$('#name').focus();
+// $('#name').focus();
 $('#other-title').hide();
 $colors.hide();
 $('#paypal').hide();
@@ -28,6 +28,22 @@ $('#bitcoin').hide();
 $('#nameErr').hide();
 $('#mailErr').hide();
 $('#actErr').hide();
+
+//adapted from https://medium.com/@dalalrohit102/full-screen-responsive-landing-page-with-html-css-jquery-e4e59c340236 
+//makes sure that whenever you refresh the page, you go back to the top
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  }
+
+//adds the animation and sets the focus to the name box whenever you click the down arrow
+$(document).ready( function () {
+    $('#down').on('click', function () {
+        $('html, body').animate({
+            scrollTop: $('.container').offset().top
+        }, 1000);
+        $('#name').focus();
+    });
+   });
 
 //Disabling the 'select method' as an option for payment and setting 'credit card' as default
 //adapted from https://stackoverflow.com/questions/11752097/disable-drop-down-option-using-jquery
