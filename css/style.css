@@ -33,7 +33,7 @@ header {
 
 h1 {
 	font-size: 5em;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+	text-shadow: 0 1px 0 #F7C195;
 	margin: 0;
 	font-family: 'Dancing Script', cursive;
 }
@@ -78,9 +78,9 @@ button {
 }
 
 legend {
-	font-weight: 500;
+	font-weight: 600;
 	padding-top: .5em;
-	border-top: 1px solid black;
+	border-top: 1px solid #F7C195;
 	margin-bottom: 1.125em;
 }
 
@@ -105,14 +105,14 @@ input {
 	font-size: 1em;
 	font-weight: 500;
 	padding: .8em;
-	background: #748891;
+	background: #F7C195;
 	border: 1px solid black;
 	outline: none;
 }
 
 input:focus {
-	background: #fff;
-	border-color: #5e97b0;
+	background: #F7C195;
+	border-color: #184c62;
 	transition: border-color .4s, background-color .4s;
 }
 
@@ -122,15 +122,16 @@ input[type="radio"] {
 }
 
 button {
-	color: #fff;
+	color: black;
 	padding: .55em 1.25em;
-	background: #22627e;
+	background: #F7C195;
 	margin: 1.25em 0 .5em;
 	cursor: pointer;
 }
 
 button:hover {
 	background: #184c62;
+	color: white;
 }
 
 .disabled {
@@ -143,7 +144,7 @@ button:hover {
 }
 
 .valid {
-	border: 1px solid #black;
+	border: 1px solid black;
 }
 
 .errorMsg {
