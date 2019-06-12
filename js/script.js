@@ -57,8 +57,7 @@ $('#payment option[value="credit card"]').prop('selected', true)
 
 //If job title is selected as 'other', I'm making the other title input box visible
 $('#title').on('change', () => {
-    if ($('#title').val() === 'other'){$('#other-title').show()}
-    else {$('#other-title').hide()}
+    $('#title').val() === 'other' ? $('#other-title').show() : $('#other-title').hide();
 })
 
 //T-SHIRT INFO
@@ -68,20 +67,14 @@ $('#design').on('change', () => {
     if ($('#design').val() === 'js puns') {
         $colors.show()
         for (let i = 0; i < $shirtColor.length; i++) {
-            if ($($shirtColor[i]).val() === 'cornflowerblue' || $($shirtColor[i]).val() === 'darkslategrey' || $($shirtColor[i]).val() === 'gold') {
-                $($shirtColor[i]).show()
-            } else {
-                $($shirtColor[i]).hide()
-            }
+            $($shirtColor[i]).val() === 'cornflowerblue' || $($shirtColor[i]).val() === 'darkslategrey' || $($shirtColor[i]).val() === 'gold' ?
+            $($shirtColor[i]).show() : $($shirtColor[i]).hide();
         }
     } else if ($('#design').val() === 'heart js') {
         $colors.show()
         for (let i = 0; i < $shirtColor.length; i++) {
-            if ($($shirtColor[i]).val() === 'tomato' || $($shirtColor[i]).val() === 'steelblue' || $($shirtColor[i]).val() === 'dimgrey') {
-                $($shirtColor[i]).show()
-            } else {
-                $($shirtColor[i]).hide()
-            }
+            $($shirtColor[i]).val() === 'tomato' || $($shirtColor[i]).val() === 'steelblue' || $($shirtColor[i]).val() === 'dimgrey' ?
+            $($shirtColor[i]).show() : $($shirtColor[i]).hide();
         }
     } else {$colors.hide()}
 })
@@ -119,11 +112,7 @@ $('.activities').on("click", (e) => {
     //get the cost from the label of the box that was checked
     let $indCost = $(e.target).parent().text();
     //either add or subtract everything after the 0 to the 'calcCost' variable
-    if ($(e.target).is(':checked')) {
-        calcCost += parseInt($indCost.substring($indCost.indexOf('$')+1,));
-    } else {
-        calcCost -= parseInt($indCost.substring($indCost.indexOf('$')+1,));
-    }
+    $(e.target).is(':checked') ? calcCost += parseInt($indCost.substring($indCost.indexOf('$')+1,)) : calcCost -= parseInt($indCost.substring($indCost.indexOf('$')+1,));
     //replace the text in the cost message span with the calculated cost
     $('#totalCostMessage span').text(calcCost)
 })
@@ -249,33 +238,17 @@ $('#mail').on('input', () => {
 })
 
 $('.activities input').on('click', () => {
-    if (!$('.activities input').is(':checked')){
-        $('#actErr').show();
-    } else {
-        $('#actErr').hide();
-    }
+    !$('.activities input').is(':checked') ? $('#actErr').show() : $('#actErr').hide();
 })
-//$('#cc-num').val().length < 13 || $('#cc-num').val().length > 16 && 
+
 $('#cc-num').on('input', () => {
-    if (!isCCNum($('#cc-num').val())) {
-        $('#cc-num').removeClass('valid').addClass('invalid');
-    } else {
-        $('#cc-num').removeClass('invalid').addClass('valid');
-    }
+    !isCCNum($('#cc-num').val()) ? $('#cc-num').removeClass('valid').addClass('invalid') : $('#cc-num').removeClass('invalid').addClass('valid');
 })
 
 $('#zip').on('input', () => {
-    if (isZCNum($('#zip').val())) {
-        $('#zip').removeClass('invalid').addClass('valid');
-    } else {
-        $('#zip').removeClass('valid').addClass('invalid');
-    }
+    isZCNum($('#zip').val()) ? $('#zip').removeClass('invalid').addClass('valid') : $('#zip').removeClass('valid').addClass('invalid');
 })
 
 $('#cvv').on('input', () => {
-    if (isCVVNum($('#cvv').val())) {
-        $('#cvv').removeClass('invalid').addClass('valid');
-    } else {
-        $('#cvv').removeClass('valid').addClass('invalid');
-    }
+    isCVVNum($('#cvv').val()) ? $('#cvv').removeClass('invalid').addClass('valid') : $('#cvv').removeClass('valid').addClass('invalid');
 })
