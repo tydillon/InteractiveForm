@@ -31,13 +31,13 @@ $('#actErr').hide();
 
 //adapted from https://medium.com/@dalalrohit102/full-screen-responsive-landing-page-with-html-css-jquery-e4e59c340236 
 //makes sure that whenever you refresh the page, you go back to the top
-window.onbeforeunload = function () {
+window.onbeforeunload = () => {
     window.scrollTo(0, 0);
   }
 
 //adds the animation and sets the focus to the name box whenever you click the down arrow
-$(document).ready( function () {
-    $('#down').on('click', function () {
+$(document).ready( () => {
+    $('#down').on('click', () => {
         $('html, body').animate({
             scrollTop: $('.container').offset().top
         }, 1000);
@@ -151,13 +151,28 @@ $payment.on('change', () => {
 //FORM VALIDATION - this is without the real-time validations created below.
 
 //adapted from https://stackoverflow.com/questions/2507030/email-validation-using-jquery to check if e-mail is valid 
-function isEmail(email) {
-    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+const isEmail = (email) => {
+    let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
+}
+// using regex to declare that CC, zip, and CVV must all be numbers and must be their respective lengths
+const isCCNum = (num) => {
+    let regex = /^\d{13,16}$/;
+    return regex.test(num);
+}
+
+const isZCNum = (num) => {
+    let regex = /^\d{5}$/;
+    return regex.test(num);
+}
+
+const isCVVNum = (num) => {
+    let regex = /^\d{3}$/;
+    return regex.test(num);
 }
 
 //On press of submit button, checks for form validation
-$('.container button').on('click', (e) => {
+$('button').on('click', (e) => {
     //if name is less than 3 characters, add styling and prevent use of button
     if ($('#name').val().length < 3) {
         $('#name').removeClass('valid').addClass('invalid').prop('placeholder', 'Name is required and must be greater than 3 characters');
@@ -187,21 +202,21 @@ $('.container button').on('click', (e) => {
     //only if the payment is credit card
     if($payment.val() === 'credit card') {
         //checks length of credit card
-        if ($('#cc-num').val().length < 13 || $('#cc-num').val().length > 16) {
+        if (!isCCNum($('#cc-num').val())) {
             $('#cc-num').removeClass('valid').addClass('invalid').prop('placeholder', 'Credit card is required');
             e.preventDefault();
         } else {
             $('#cc-num').removeClass('invalid').addClass('valid');
         }
         //checks length of zip
-        if ($('#zip').val().length === 5) {
+        if (isZCNum($('#zip').val())) {
             $('#zip').removeClass('invalid').addClass('valid');
         } else {
             $('#zip').removeClass('valid').addClass('invalid').prop('placeholder', 'Zip is required');
             e.preventDefault();
         }
         //checks length of cvv
-        if ($('#cvv').val().length === 3) {
+        if (isCVVNum($('#cvv').val())) {
             $('#cvv').removeClass('invalid').addClass('valid');
         } else {
             $('#cvv').removeClass('valid').addClass('invalid').prop('placeholder', 'CVV is required');
@@ -213,7 +228,7 @@ $('.container button').on('click', (e) => {
 //REAL TIME ERROR MESSAGES
 // similar to above, except these are set up as listeners on the individual inputs rather than on the whole document
 
-$('#name').on('input', function(){
+$('#name').on('input', () => {
     if ($('#name').val().length < 3) {
         $('#name').removeClass('valid').addClass('invalid');
         $('#nameErr').show();
@@ -223,7 +238,7 @@ $('#name').on('input', function(){
     }
 })
 
-$('#mail').on('input', function(){
+$('#mail').on('input', () => {
     if (!isEmail($('#mail').val())) {
         $('#mail').removeClass('valid').addClass('invalid');
         $('#mailErr').show();
@@ -233,32 +248,32 @@ $('#mail').on('input', function(){
     }
 })
 
-$('.activities input').on('click', function(){
+$('.activities input').on('click', () => {
     if (!$('.activities input').is(':checked')){
         $('#actErr').show();
     } else {
         $('#actErr').hide();
     }
 })
-
-$('#cc-num').on('input', function(){
-    if ($('#cc-num').val().length < 13 || $('#cc-num').val().length > 16) {
+//$('#cc-num').val().length < 13 || $('#cc-num').val().length > 16 && 
+$('#cc-num').on('input', () => {
+    if (!isCCNum($('#cc-num').val())) {
         $('#cc-num').removeClass('valid').addClass('invalid');
     } else {
         $('#cc-num').removeClass('invalid').addClass('valid');
     }
 })
 
-$('#zip').on('input', function(){
-    if ($('#zip').val().length === 5) {
+$('#zip').on('input', () => {
+    if (isZCNum($('#zip').val())) {
         $('#zip').removeClass('invalid').addClass('valid');
     } else {
         $('#zip').removeClass('valid').addClass('invalid');
     }
 })
 
-$('#cvv').on('input', function(){
-    if ($('#cvv').val().length === 3) {
+$('#cvv').on('input', () => {
+    if (isCVVNum($('#cvv').val())) {
         $('#cvv').removeClass('invalid').addClass('valid');
     } else {
         $('#cvv').removeClass('valid').addClass('invalid');
