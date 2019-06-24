@@ -108,7 +108,8 @@ $('.activities').on("click", compiledConflict)
 
 //Make a running total of cost based on selections
 
-$('.activities').on("click", (e) => {
+$('.activities input[type=checkbox]').on("click", (e) => {
+    console.log(e.target)
     //get the cost from the label of the box that was checked
     let $indCost = $(e.target).parent().text();
     //either add or subtract everything after the 0 to the 'calcCost' variable
